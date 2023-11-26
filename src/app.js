@@ -11,6 +11,15 @@ function App({store}) {
 
   const list = store.getState().list;
 
+  const getRepeatCount = (count) => {
+    const lastDigit = count % 10;
+    const twoLastDigits = count % 100;
+    if ([2, 3, 4].includes(lastDigit) && ![12, 13, 14].includes(twoLastDigits)) {
+      return `| Выделяли ${count} раза`;
+    }
+    return `| Выделяли ${count} раз`; 
+  }
+
   return (
     <div className='App'>
       <div className='App-head'>
@@ -26,7 +35,7 @@ function App({store}) {
               <div className={'Item' + (item.selected ? ' Item_selected' : '')}
                    onClick={() => store.selectItem(item.code)}>
                 <div className='Item-code'>{item.code}</div>
-                <div className='Item-title'>{item.title}{item.count ? `| Выделяли ${item.count} раз` : ''}</div>
+                <div className='Item-title'>{item.title}{item.count ? getRepeatCount(item.count) : ''}</div>
                 <div className='Item-actions'>
                   <button onClick={(evt) => store.deleteItem(item.code, evt)}>
                     Удалить

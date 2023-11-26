@@ -4,8 +4,21 @@
 class Store {
   constructor(initState = {}) {
     this.state = initState;
-    this.state.lastItem = this.state.list.length;
+    this.state.lastItem = this.getLastItem(this.state.list);
     this.listeners = []; // Слушатели изменений состояния
+  }
+
+  getLastItem(list) {
+    const sortedList = [...list].sort((itemA, itemB) => {
+      if (itemA.code < itemB.code) {
+        return -1;
+      }
+      if (itemA.code > itemB.code) {
+        return 1;
+      }
+      return 0;
+    });
+    return sortedList[sortedList.length - 1].code;
   }
 
   /**
@@ -56,7 +69,6 @@ class Store {
    */
   deleteItem(code, evt) {
     evt.stopPropagation();
-    console.log(1);
     this.setState({
       ...this.state,
       list: this.state.list.filter(item => item.code !== code)
@@ -68,10 +80,8 @@ class Store {
    * @param code
    */
   selectItem(code) {
-    console.log(2);
     const currentItem = this.state.list.find(item => item.code === code);
     currentItem.selected = !currentItem.selected;
-    console.log(currentItem);
     this.setState({
       ...this.state,
       list: this.state.list.map(item => {
