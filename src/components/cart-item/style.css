@@ -1,0 +1,33 @@
+.CartItem {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 20px;
+  transition: background-color 1s;
+  border-bottom: 1px dashed #ccc;
+}
+
+.CartItem__Code {
+  width: 30px;
+}
+
+.CartItem__Title {
+  display: flex;
+  flex-grow: 1;
+  justify-content: start;
+}
+
+.CartItem__Price {
+  width: auto;
+}
+
+.CartItem__Quantity {
+  display: flex;
+  justify-content: flex-end;
+  width: 100px;
+}
+
+.CartItem__Button {
+  width: 76px;
+  margin-left: 24px;
+}

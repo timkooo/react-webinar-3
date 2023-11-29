@@ -1,25 +1,26 @@
 .Item {
   display: flex;
   justify-content: flex-start;
+  align-items: center;
   transition: background-color 1s;
 }
 
-.Item_selected {
-  background: #75aaf1;
-  color: #fff;
+.Item__Code {
+  width: 31px;
 }
 
-.Item-code {
-  padding: 20px 10px 20px 20px;
+.Item__Title {
+  flex-grow: 1;
 }
 
-.Item-title {
-  width: 100%;
-  padding: 20px 10px;
-}
-
-.Item-actions {
+.Item__Price {
   display: flex;
   justify-content: flex-end;
-  padding: 20px 20px 20px 10px;
+  min-width: 200px;
+}
+
+.Item__Button {
+  width: 80px;
+  height: 21px;
+  margin-left: 24px;
 }

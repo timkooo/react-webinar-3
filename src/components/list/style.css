@@ -3,5 +3,6 @@
 }
 
 .List-item {
+  padding: 21px 21px 21px 17px;
   border-bottom: 1px dashed #ccc;
 }

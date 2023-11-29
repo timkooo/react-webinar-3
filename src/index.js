@@ -13,6 +13,13 @@ const store = new Store({
     {code: generateCode(), title: 'Телефон iPhone XIXV', price: 120000},
     {code: generateCode(), title: 'Карандаши цветные', price: 111},
     {code: generateCode(), title: 'Товар сюрприз', price: 0},
+  ],
+  cart: [
+    // {code: generateCode(), title: 'Название товара', price: 100.0, quantity: 3},
+    // {code: generateCode(), title: 'Книга про React', price: 770, quantity: 3},
+    // {code: generateCode(), title: 'Конфета', price: 33, quantity: 3},
+    // {code: generateCode(), title: 'Телефон iPhone XIXV', price: 120000, quantity: 4},
+    // {code: generateCode(), title: 'Книга про React', price: 770, quantity: 5},
   ]
 });
 

@@ -50,6 +50,27 @@ class Store {
     })
   };
 
+  addItemToCart(item) {
+    const itemInCart = this.state.cart.findIndex((cartItem) => cartItem.code === item.code);
+    if (itemInCart === -1) {
+      this.setState({
+        ...this.state,
+        cart: [...this.state.cart, {...item, quantity: 1}]
+      });
+      return;
+    }
+    const newCart = this.state.cart.map((cartItem) => {
+      if (cartItem.code === item.code) {
+        return {...cartItem, quantity: cartItem.quantity + 1}
+      }
+      return cartItem;
+    });
+    this.setState({
+      ...this.state,
+      cart: newCart
+    });
+  };
+
   /**
    * Удаление записи по коду
    * @param code
@@ -59,6 +80,13 @@ class Store {
       ...this.state,
       // Новый список, в котором не будет удаляемой записи
       list: this.state.list.filter(item => item.code !== code)
+    })
+  };
+
+  deleteItemFromCart(item) {
+    this.setState({
+      ...this.state,
+      cart: this.state.cart.filter((cartItem) => cartItem.code !== item.code)
     })
   };
 
