@@ -15,17 +15,6 @@ function App({store}) {
 
   const list = store.getState().list;
   const cart = store.getState().cart;
-  const cartSummary = useMemo(() => getCartSummary(), [cart]);
-
-  function getCartSummary() {
-    if (cart.length === 0) {
-      return null;
-    }
-    return {
-      amount : cart.reduce((accum, item) => accum + item.quantity, 0),
-      totalPrice : cart.reduce((accum, item) => accum + item.price * item.quantity, 0)
-    }
-  }
 
   const callbacks = {
     onDeleteFromCart: useCallback((item) => {
@@ -40,9 +29,9 @@ function App({store}) {
   return (
     <PageLayout>
       <Head title='Магазин'/>
-      <Controls cartSummary={cartSummary} onModalOpen={() => setModalVisible(true)}/>
+      <Controls cartSummary={cart.cartSummary} onModalOpen={() => setModalVisible(true)}/>
       <List list={list} onAddItemToCart={callbacks.onAddItemToCart}/>
-      <CartModal cartSummary={cartSummary} cartModalVisible={modalVisible} cartItems={cart} onModalClose={() => setModalVisible(false)} onDeleteFromCart={callbacks.onDeleteFromCart}/>
+      <CartModal cartSummary={cart.cartSummary} cartModalVisible={modalVisible} cartItems={cart.cartItems} onModalClose={() => setModalVisible(false)} onDeleteFromCart={callbacks.onDeleteFromCart}/>
     </PageLayout>
   );
 }

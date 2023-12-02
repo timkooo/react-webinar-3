@@ -51,15 +51,22 @@ class Store {
   };
 
   addItemToCart(item) {
-    const itemInCart = this.state.cart.findIndex((cartItem) => cartItem.code === item.code);
+    const itemInCart = this.state.cart.cartItems.findIndex((cartItem) => cartItem.code === item.code);
     if (itemInCart === -1) {
       this.setState({
         ...this.state,
-        cart: [...this.state.cart, {...item, quantity: 1}]
+        cart: {
+          cartItems: [...this.state.cart.cartItems, {...item, quantity: 1}],
+          cartSummary: {
+            ...this.state.cart.cartSummary,
+            amount: this.state.cart.cartSummary.amount + 1,
+            totalPrice: this.state.cart.cartSummary.totalPrice + item.price
+          }
+        }
       });
       return;
     }
-    const newCart = this.state.cart.map((cartItem) => {
+    const newCartItems = this.state.cart.cartItems.map((cartItem) => {
       if (cartItem.code === item.code) {
         return {...cartItem, quantity: cartItem.quantity + 1}
       }
@@ -67,7 +74,13 @@ class Store {
     });
     this.setState({
       ...this.state,
-      cart: newCart
+      cart: {
+        cartItems: newCartItems,
+        cartSummary: {
+          ...this.state.cart.cartSummary,
+          totalPrice: this.state.cart.cartSummary.totalPrice + item.price
+        }
+      }
     });
   };
 
@@ -84,9 +97,17 @@ class Store {
   };
 
   deleteItemFromCart(item) {
+    const currentItem = this.state.cart.cartItems.find((cartItem) => cartItem.code === item.code);
     this.setState({
       ...this.state,
-      cart: this.state.cart.filter((cartItem) => cartItem.code !== item.code)
+      cart: {
+        cartItems: this.state.cart.cartItems.filter((cartItem) => cartItem.code !== item.code),
+        cartSummary: {
+          ...this.state.cart.cartSummary,
+          amount: this.state.cart.cartSummary.amount - 1,
+          totalPrice: this.state.cart.cartSummary.totalPrice - currentItem.price * currentItem.quantity
+        }
+      }
     })
   };
 

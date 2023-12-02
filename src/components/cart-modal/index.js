@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import CartItem from "../cart-item";
+import { formatPrice } from '../../utils';
 import './style.css';
 
 function CartModal({cartSummary, cartModalVisible, cartItems, onModalClose, onDeleteFromCart}) {
@@ -19,7 +20,7 @@ function CartModal({cartSummary, cartModalVisible, cartItems, onModalClose, onDe
         }
         <div className='CartModal__Summary Summary'>
           <p className='Summary__Label'>Итого</p>
-          <p className='Summary__Price'>{cartSummary ? cartSummary.totalPrice : 0} &#8381;</p>
+          <p className='Summary__Price'>{cartSummary ? formatPrice(cartSummary.totalPrice) : 0} &#8381;</p>
         </div>
       </div>
     </div>

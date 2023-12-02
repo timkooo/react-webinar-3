@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { formatPrice } from '../../utils';
 import './style.css';
 
 function CartItem({item, onDeleteItem}) {
@@ -8,7 +9,7 @@ function CartItem({item, onDeleteItem}) {
     <div className='CartItem'>
       <div className='CartItem__Code'>{item.code}</div>
       <div className='CartItem__Title'>{item.title}</div>
-      <div className='CartItem__Price'>{item.price} &#8381;</div>
+      <div className='CartItem__Price'>{formatPrice(item.price)} &#8381;</div>
       <div className='CartItem__Quantity'>{item.quantity} шт</div>
       <button className='CartItem__Button' onClick={onDeleteItem}>
         Удалить
