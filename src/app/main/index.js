@@ -3,13 +3,16 @@ import Item from "../../components/item";
 import PageLayout from "../../components/page-layout";
 import Head from "../../components/head";
 import BasketTool from "../../components/basket-tool";
+import Pagination from "../../components/pagination";
 import List from "../../components/list";
 import useStore from "../../store/use-store";
 import useSelector from "../../store/use-selector";
+import Basket from '../basket';
 
 function Main() {
 
   const store = useStore();
+  const activeModal = useSelector(state => state.modals.name);
 
   useEffect(() => {
     store.actions.catalog.load();
@@ -35,13 +38,16 @@ function Main() {
   };
 
   return (
-    <PageLayout>
-      <Head title='Магазин'/>
-      <BasketTool onOpen={callbacks.openModalBasket} amount={select.amount}
-                  sum={select.sum}/>
-      <List list={select.list} renderItem={renders.item}/>
-    </PageLayout>
-
+    <>
+      <PageLayout>
+        <Head title='Магазин'/>
+        <BasketTool onOpen={callbacks.openModalBasket} amount={select.amount}
+                    sum={select.sum}/>
+        <List list={select.list} renderItem={renders.item}/>
+        <Pagination/>
+      </PageLayout>
+      {activeModal === 'basket' && <Basket/>}
+    </>
   );
 }
 

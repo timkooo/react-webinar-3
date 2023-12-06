@@ -3,11 +3,16 @@ import PropTypes from 'prop-types';
 import {cn as bem} from '@bem-react/classname';
 import {numberFormat, plural} from "../../utils";
 import './style.css';
+import Translator from '../translator';
+import { Link } from 'react-router-dom';
+import LangSwitcher from '../lang-switcher';
 
 function BasketTool({sum, amount, onOpen}) {
   const cn = bem('BasketTool');
   return (
     <div className={cn()}>
+      <LangSwitcher/>
+      <Link to='/'>Главная</Link>
       <span className={cn('label')}>В корзине:</span>
       <span className={cn('total')}>
         {amount
@@ -19,7 +24,7 @@ function BasketTool({sum, amount, onOpen}) {
           : `пусто`
         }
       </span>
-      <button onClick={onOpen}>Перейти</button>
+      <button onClick={onOpen}><Translator token={'Перейти'}/></button>
     </div>
   );
 }
