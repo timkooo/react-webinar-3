@@ -6,6 +6,9 @@ import useStore from "../../store/use-store";
 import useSelector from "../../store/use-selector";
 import { useParams } from 'react-router-dom';
 import Basket from '../basket';
+import {numberFormat} from "../../utils";
+import './style.css';
+import Translator from '../../components/translator';
 
 function ItemPage() {
   const { id } = useParams();
@@ -39,12 +42,12 @@ function ItemPage() {
                     sum={select.sum}/>
         {currentItem ? (
           <div className='ItemPage'>
-            <div className='Item__Description'>{currentItem.description}</div>
-            <div className='Item__Country'>{currentItem.madeIn._type}</div>
-            <div className='Item__Category'>{currentItem.category._type}</div>
-            <div className='Item__Year'>{currentItem.edition}</div>
-            <div className='Item__Price'>{currentItem.price}</div>
-            <button onClick={() => callbacks.addToBasket(id)}>Добавить</button>
+            <div className='ItemPage__Item'>{currentItem.description}</div>
+            <div className='ItemPage__Item'>Страна производитель:&nbsp;<b>{currentItem.madeIn._id}</b></div>
+            <div className='ItemPage__Item'>Категория:&nbsp;<b>{currentItem.category._id}</b></div>
+            <div className='ItemPage__Item'>Год выпуска:&nbsp;<b>{currentItem.edition}</b></div>
+            <div className='ItemPage__Item ItemPage__Item--Price'>Цена:&nbsp;{numberFormat(currentItem.price)}&nbsp;&#8381;</div>
+            <button className='ItemPage__Button' onClick={() => callbacks.addToBasket(id)}><Translator token={'Добавить'}/></button>
           </div>) : (<div>Товар отсутствует</div>)
         }
       </PageLayout>

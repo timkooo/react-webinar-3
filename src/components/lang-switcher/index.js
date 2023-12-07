@@ -14,9 +14,9 @@ function LangSwitcher() {
   }
 
   return (
-    <select name="language" onChange={(evt) => handleLanguageChange(evt)}>
+    <select name="language" onChange={(evt) => handleLanguageChange(evt)} value={appLanguage}>
       {Object.keys(glossary).map((key) => (
-        <option value={key} selected={key === appLanguage}>{glossary[key].name}</option>
+        <option key={key} value={key}>{glossary[key].name}</option>
       ))}
     </select>
   )

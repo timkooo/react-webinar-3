@@ -18,11 +18,11 @@ function Item(props) {
     <div className={cn()}>
       {/*<div className={cn('code')}>{props.item._id}</div>*/}
       <div className={cn('title')}>
-        <Link to={`/item/${props.item._id}`}>{props.item.title}</Link>
+        <Link className={cn('link')} to={`/item/${props.item._id}`}>{props.item.title}</Link>
       </div>
       <div className={cn('actions')}>
         <div className={cn('price')}>{numberFormat(props.item.price)} ₽</div>
-        <button onClick={callbacks.onAdd}><Translator token={'Добавить'}/></button>
+        <button className={cn('button')}onClick={callbacks.onAdd}><Translator token={'Добавить'}/></button>
       </div>
     </div>
   );
