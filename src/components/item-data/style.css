@@ -1,4 +1,5 @@
-.ItemPage {
+.ItemData {
+  grid-column: 1 / 3;
   display: flex;
   flex-direction: column;
   row-gap: 20px;
@@ -8,7 +9,7 @@
   padding-right: 40px;
 }
 
-.ItemPage__Item {
+.ItemData__Item {
   display: flex;
   align-items: center;
   font-size: 18px;
@@ -16,11 +17,11 @@
   min-height: 21px;
 }
 
-.ItemPage__Item--Price {
+.ItemData__Item--Price {
   font-size: 24px;
   font-weight: 700;
 }
 
-.ItemPage__Button {
+.ItemData__Button {
   min-width: 76px;
 }

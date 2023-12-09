@@ -6,9 +6,8 @@ import useStore from "../../store/use-store";
 import useSelector from "../../store/use-selector";
 import { useParams } from 'react-router-dom';
 import Basket from '../basket';
-import {numberFormat} from "../../utils";
-import './style.css';
-import Translator from '../../components/translator';
+import ItemData from '../../components/item-data';
+import Menu from '../../components/menu';
 
 function ItemPage() {
   const { id } = useParams();
@@ -38,18 +37,10 @@ function ItemPage() {
     <>
       <PageLayout>
         <Head title={currentItem? currentItem.title : 'Товар отсутствует'}/>
+        <Menu/>
         <BasketTool onOpen={callbacks.openModalBasket} amount={select.amount}
                     sum={select.sum}/>
-        {currentItem ? (
-          <div className='ItemPage'>
-            <div className='ItemPage__Item'>{currentItem.description}</div>
-            <div className='ItemPage__Item'>Страна производитель:&nbsp;<b>{currentItem.madeIn._id}</b></div>
-            <div className='ItemPage__Item'>Категория:&nbsp;<b>{currentItem.category._id}</b></div>
-            <div className='ItemPage__Item'>Год выпуска:&nbsp;<b>{currentItem.edition}</b></div>
-            <div className='ItemPage__Item ItemPage__Item--Price'>Цена:&nbsp;{numberFormat(currentItem.price)}&nbsp;&#8381;</div>
-            <button className='ItemPage__Button' onClick={() => callbacks.addToBasket(id)}><Translator token={'Добавить'}/></button>
-          </div>) : (<div>Товар отсутствует</div>)
-        }
+        <ItemData currentItem={currentItem} onAddToBasket={callbacks.addToBasket}/>
       </PageLayout>
       {activeModal === 'basket' && <Basket/>}
     </>

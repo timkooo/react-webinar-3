@@ -1,0 +1,22 @@
+.Menu {
+  grid-column: 1 / 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.Menu-link {
+  height: 21px;
+  font-size: 18;
+  color: #0087e9;
+  text-decoration: underline;
+  margin-right: 20px;
+}
+
+.Menu-switcher {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: auto;
+}

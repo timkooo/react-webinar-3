@@ -1,24 +1,10 @@
 /* Контрол с общими действиями */
 .BasketTool {
+  grid-column: 2 / 3;
   display: flex;
   justify-content: flex-end;
   padding: 20px;
   font-size: 18px;
-}
-
-.BasketTool-main {
-  height: 21px;
-  font-size: 18;
-  color: #0087e9;
-  text-decoration: underline;
-  margin-right: 20px;
-}
-
-.BasketTool-switcher {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-right: auto;
 }
 
 .BasketTool-total {
