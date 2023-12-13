@@ -16,5 +16,11 @@
     "few": "товара",
     "many": "товаров",
     "other": "товара"
-  }
+  },
+  "user.login": "Вход",
+  "user.logout": "Выход",
+  "usercard.logout": "Выйти",
+  "usercard.login": "Войти",
+  "userform.login": "Логин",
+  "userform.password": "Пароль"
 }

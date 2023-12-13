@@ -13,3 +13,10 @@ body {
   box-sizing: border-box;
   box-shadow: 0 0 15px 5px #0000003b;
 }
+
+.PageLayout-head {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 10px 20px;
+}

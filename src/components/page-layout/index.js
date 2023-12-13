@@ -1,6 +1,7 @@
 import {memo} from "react";
 import PropTypes from "prop-types";
 import {cn as bem} from '@bem-react/classname';
+import LoginHead from '../login-head';
 import './style.css';
 
 function PageLayout({head, footer, children}) {
@@ -10,6 +11,7 @@ function PageLayout({head, footer, children}) {
   return (
     <div className={cn()}>
       <div className={cn('head')}>
+        <LoginHead/>
         {head}
       </div>
       <div className={cn('center')}>

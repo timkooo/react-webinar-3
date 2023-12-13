@@ -1,0 +1,13 @@
+.LoginHead {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.LoginHead__button {
+  margin-left: 20px;
+}
+
+.LoginHead__user {
+  color:#0087e9;
+}

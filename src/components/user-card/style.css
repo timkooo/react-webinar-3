@@ -1,0 +1,27 @@
+.UserCard {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
+  padding: 20px;
+  row-gap: 20px;
+}
+
+.UserCard__title {
+  margin: 0;
+  margin-top: 16px;
+  margin-bottom: 10px;
+  line-height: 28px;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.UserCard__item {
+  margin: 0;
+  line-height: 21px;
+  font-size: 18px;
+}
+
+.UserCard__value {
+  font-weight: 700;
+}

@@ -14,5 +14,11 @@
   "basket.articles": {
     "one": "article",
     "other": "articles"
-  }
+  },
+  "user.login": "Login",
+  "user.logout": "Logout",
+  "usercard.logout": "Logout",
+  "usercard.login": "Login",
+  "userform.login": "Login",
+  "userform.password": "Password"
 }
