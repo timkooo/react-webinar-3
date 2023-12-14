@@ -1,4 +1,4 @@
-import { memo, useCallback } from "react";
+import { memo, useCallback, useEffect } from "react";
 import { useNavigate, Link } from 'react-router-dom';
 import useStore from '../../hooks/use-store';
 import useSelector from "../../hooks/use-selector";

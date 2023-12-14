@@ -6,7 +6,8 @@ class UserState extends StoreModule {
     return {
       user: {},
       authStatus: false,
-      error: null
+      error: null,
+      waiting: true,
     };
   }
 
@@ -25,7 +26,8 @@ class UserState extends StoreModule {
         ...this.getState(),
         user: json.result.user,
         authStatus: true,
-        error: null
+        error: null,
+        waiting: false,
       }, 'Пользователь авторизован'),
       localStorage.setItem('x-token', json.result.token);
       localStorage.setItem('user-id', json.result.user._id);
@@ -35,7 +37,8 @@ class UserState extends StoreModule {
         ...this.getState(),
         user: {},
         authStatus: false,
-        error: `В процессе авторизации возникла ошибка: ${json.error.message}`
+        error: `В процессе авторизации возникла ошибка: ${json.error.message}`,
+        waiting: false
       }, 'Ошибка авторизации'),
       localStorage.removeItem('x-token');
       localStorage.removeItem('user-id');
@@ -63,7 +66,8 @@ class UserState extends StoreModule {
         ...this.getState(),
         user: {},
         authStatus: false,
-        error: null
+        error: null,
+        waiting: false
       }, 'Пользователь вышел')
     };
     if (json.error) {
@@ -71,7 +75,8 @@ class UserState extends StoreModule {
         ...this.getState(),
         user: {},
         authStatus: false,
-        error: `В процессе авторизации возникла ошибка: ${json.error.message}`
+        error: `В процессе авторизации возникла ошибка: ${json.error.message}`,
+        waiting: false
       }, 'Ошибка авторизации'),
       setTimeout(() => this.setState({
         ...this.getState(),
@@ -83,11 +88,13 @@ class UserState extends StoreModule {
   async checkAuth() {
     const token = localStorage.getItem('x-token');
     const userId = localStorage.getItem('user-id');
+    console.log('222222222222');
     if (!token || !userId) {
       this.setState({
         ...this.getState(),
         authStatus: false,
-        error: 'Вы не авторизованы, введите логин и пароль'
+        error: 'Вы не авторизованы, введите логин и пароль',
+        waiting: false
       }, 'Требуется повторная авторизация');
       setTimeout(() => this.setState({
         ...this.getState(),
@@ -95,6 +102,7 @@ class UserState extends StoreModule {
       }), 6000)
     };
     if (token && userId) {
+      console.log('111111111111');
       const response = await fetch(`/api/v1/users/${userId}`, {
           headers: {
             'X-Token' : token,
@@ -106,7 +114,8 @@ class UserState extends StoreModule {
           ...this.getState(),
           user: json.result,
           authStatus: true,
-          error: null
+          error: null,
+          waiting: false
         }, 'Пользователь авторизован'),
         localStorage.setItem('x-token', token);
         localStorage.setItem('user-id', json.result._id);
@@ -116,7 +125,8 @@ class UserState extends StoreModule {
           ...this.getState(),
           user: {},
           authStatus: false,
-          error: `В процессе авторизации возникла ошибка: ${json.error.message}`
+          error: `В процессе авторизации возникла ошибка: ${json.error.message}`,
+          waiting: false
         }, 'Ошибка авторизации'),
         localStorage.removeItem('x-token');
         localStorage.removeItem('user-id');
