@@ -1,5 +1,5 @@
-import { memo, useCallback, useEffect } from "react";
-import { useNavigate, Link } from 'react-router-dom';
+import { memo, useCallback } from "react";
+import { useNavigate, Link, useLocation } from 'react-router-dom';
 import useStore from '../../hooks/use-store';
 import useSelector from "../../hooks/use-selector";
 import useInit from "../../hooks/use-init";
@@ -7,7 +7,7 @@ import useTranslate from '../../hooks/use-translate';
 import './style.css';
 
 function LoginHead() {
-
+  const location = useLocation();
   const store = useStore();
   const navigate = useNavigate();
 
@@ -32,7 +32,7 @@ function LoginHead() {
         <Link to='/profile' className="LoginHead__user">{select.user.username}</Link>
         <button className="LoginHead__button" onClick={callbacks.logout}>{t('user.logout')}</button>
       </>) : (
-      <button className="LoginHead__button" onClick={() => navigate('/login')}>{t('user.login')}</button>)}
+      <button className="LoginHead__button" onClick={() => navigate('/login', {state: {from: location}})}>{t('user.login')}</button>)}
     </div>
   )
 }

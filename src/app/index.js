@@ -4,7 +4,7 @@ import Main from "./main";
 import Basket from "./basket";
 import Article from "./article";
 import Login from './login';
-import PrivateRoute from '../components/private-route';
+import PrivateRoute from '../containers/private-route';
 import Profile from './profile';
 
 /**

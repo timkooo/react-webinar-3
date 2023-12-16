@@ -7,12 +7,17 @@ import Head from "../../components/head";
 import Navigation from "../../containers/navigation";
 import LocaleSelect from "../../containers/locale-select";
 import LoginForm from '../../components/login-form';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 /**
  * Страница товара с первичной загрузкой товара по id из url адреса
  */
 function Login() {
   const store = useStore();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const redirectLocation = location?.state?.from || '/';
+  // console.log(window.history);
 
   const select = useSelector(state => ({
     authStatus: state.user.authStatus,
@@ -23,11 +28,12 @@ function Login() {
 
   const callbacks = {
     handleLogout: useCallback(() => store.actions.user.logout(), [store]),
-    handleLogin: useCallback((evt) => {
+    handleLogin: useCallback(async (evt) => {
       evt.preventDefault();
       const form = new FormData(evt.target);
       const { login, password } = Object.fromEntries(form);
-      store.actions.user.login({login: login, password: password});
+      await store.actions.user.login({login: login, password: password});
+      navigate(redirectLocation);
     }, [store])
   }
 

@@ -93,13 +93,8 @@ class UserState extends StoreModule {
       this.setState({
         ...this.getState(),
         authStatus: false,
-        error: 'Вы не авторизованы, введите логин и пароль',
         waiting: false
       }, 'Требуется повторная авторизация');
-      setTimeout(() => this.setState({
-        ...this.getState(),
-        error: null
-      }), 6000)
     };
     if (token && userId) {
       console.log('111111111111');
