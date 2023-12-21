@@ -1,0 +1,13 @@
+.Comment {
+  margin-left: inherit;
+}
+
+.Comment-button {
+  padding: 0;
+  border: none;
+  background-color: inherit;
+  font-size: 12px;
+  line-height: 14px;
+  font-weight: 400;
+  color: #0087e9;
+}
