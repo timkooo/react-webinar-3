@@ -3,6 +3,7 @@ import {cn as bem} from '@bem-react/classname';
 import numberFormat from '../../utils/number-format';
 import CommentForm from '../comment-form';
 import './style.css';
+import humanizeDate from '../../utils/humanize-date';
 
 
 function Comment({comment, active, onSetActive, authStatus, margin}) {
@@ -17,8 +18,8 @@ function Comment({comment, active, onSetActive, authStatus, margin}) {
   return (
     <div className={cn()} style={{marginLeft: margin + 'px'}}>
       <div className={cn('head')}>
-        <div className={cn('author')}>{comment.author._id}</div>
-        <div className={cn('date')}>{comment.dateCreate}</div>
+        <p className={cn('author')}>{comment.author._id}</p>
+        <p className={cn('date')}>{humanizeDate(comment.dateCreate)}</p>
       </div>
       <p className={cn('text')}>{comment.text}</p>
       {active ? <CommentForm onCancelActive={callbacks.cancelActive} comment={comment} authStatus={authStatus}/> : <button className={cn('button')} onClick={callbacks.setActiveComment}>Ответить</button>}

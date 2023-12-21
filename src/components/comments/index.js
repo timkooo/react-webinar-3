@@ -43,7 +43,7 @@ function Comments({comments, article, authStatus}) {
     <div className={cn()}>
       <h2 className={cn('title')}>Комментарии&nbsp;({countComments(comments) || 0})</h2>
       {comments && <ul className={cn('list')}>{createCommentsList()}</ul>}
-      <ArticleCommentsForm article={article} authStatus={authStatus}/>
+      {!activeComment && <ArticleCommentsForm article={article} authStatus={authStatus}/>}
     </div>)
 }
 
