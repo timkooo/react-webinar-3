@@ -12,6 +12,7 @@ import TopHead from '../../containers/top-head';
 
 function Main() {
 
+  const { lang } = useTranslate();
   const store = useStore();
 
   useInit(async () => {
@@ -19,7 +20,7 @@ function Main() {
       store.actions.catalog.initParams(),
       store.actions.categories.load()
     ]);
-  }, [], true);
+  }, [ lang ], true);
 
   const {t} = useTranslate();
 
