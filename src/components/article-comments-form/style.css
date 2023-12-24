@@ -14,7 +14,7 @@
 }
 
 .CommentsForm-text {
-  width: 100%;
+  align-self: stretch;
   height: 76px;
   padding: 4px 5px;
   font-size: 14px;

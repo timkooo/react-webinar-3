@@ -18,6 +18,7 @@ import useSelector from '../../hooks/use-selector';
 
 function Article() {
   const store = useStore();
+  const { lang } = useTranslate();
 
   const dispatch = useDispatch();
   // Параметры из пути /articles/:id
@@ -27,15 +28,17 @@ function Article() {
   useInit(() => {
     //store.actions.article.load(params.id);
     dispatch(articleActions.load(params.id));
-  }, [params.id]);
+  }, [params.id, lang]);
 
   const select = useSelectorRedux(state => ({
     article: state.article.data,
     comments: state.article.comments,
-    waiting: state.article.waiting,
+    commentsCount: state.article.commentsCount,
+    waiting: state.article.waiting
   }), shallowequal); // Нужно указать функцию для сравнения свойства объекта, так как хуком вернули объект
 
   const authStatus = useSelector(state => state.session.exists);
+  const currentUser = useSelector(state => state.session.user);
 
   const {t} = useTranslate();
 
@@ -55,7 +58,7 @@ function Article() {
         <ArticleCard article={select.article} onAdd={callbacks.addToBasket} t={t}/>
       </Spinner>
       <Spinner active={select.waiting}>
-        <Comments comments={select.comments} article={select.article} authStatus={authStatus}/>
+        <Comments comments={select.comments} commentsCount={select.commentsCount} article={select.article} authStatus={authStatus} currentUser={currentUser}/>
       </Spinner>
     </PageLayout>
   );

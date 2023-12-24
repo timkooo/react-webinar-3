@@ -10,29 +10,39 @@ import countComments from '../../utils/count-comments';
 import './style.css';
 
 
-function Comments({comments, article, authStatus}) {
+function Comments({comments, commentsCount, article, authStatus, currentUser}) {
   const [activeComment, setActiveComment] = useState(null);
   const location = useLocation();
 
   const cn = bem('Comments');
 
+  const isCurrentUser = (authorId) => {
+    if (!currentUser) {
+      return false;
+    }
+    return authorId === currentUser._id;
+  }
+
   const createComment = (comment, margin = 0) => {
     if (!comment.children) {
-      return (<li key={comment._id} className={cn('item')}>
+      return (<Fragment key={comment._id}>
       <Comment key={comment._id} comment={comment}
                        active={comment._id === activeComment ? true : false}
                        onSetActive={setActiveComment}
                        authStatus={authStatus}
-                       margin={margin}/></li>);
+                       margin={margin}
+                       isCurrentUser={isCurrentUser(comment.author._id)}/></Fragment>);
     } else {
-      const newMargin = margin + 30;
-      return (<Fragment key={comment._id}><li key={comment._id} className={cn('item')}>
+      const newMargin = margin < 210 ? margin + 30 : margin;
+      return (<Fragment key={comment._id}>
         <Comment key={comment._id} comment={comment}
                   active={comment._id === activeComment ? true : false}
                   onSetActive={setActiveComment}
                   authStatus={authStatus}
-                  margin={margin}/></li>
-        {comment.children.map((childComment) => createComment(childComment, newMargin))}
+                  margin={margin}
+                  isCurrentUser={isCurrentUser(comment.author._id)}>
+          {comment.children.map((childComment) => createComment(childComment, newMargin))}
+        </Comment>
       </Fragment>)
     }
   }
@@ -41,8 +51,8 @@ function Comments({comments, article, authStatus}) {
 
   return (
     <div className={cn()}>
-      <h2 className={cn('title')}>Комментарии&nbsp;({countComments(comments) || 0})</h2>
-      {comments && <ul className={cn('list')}>{createCommentsList()}</ul>}
+      <h2 className={cn('title')}>Комментарии&nbsp;({commentsCount || 0})</h2>
+      {comments && <div className={cn('list')}>{createCommentsList()}</div>}
       {!activeComment && <ArticleCommentsForm article={article} authStatus={authStatus}/>}
     </div>)
 }

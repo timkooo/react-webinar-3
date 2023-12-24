@@ -7,7 +7,7 @@ import { useLocation, Link } from 'react-router-dom';
 import './style.css';
 
 
-function CommentForm({onCancelActive, comment, authStatus}) {
+function CommentForm({onCancelActive, comment, authStatus, margin, active}) {
   const dispatch = useDispatch();
   const location = useLocation();
 
@@ -18,20 +18,25 @@ function CommentForm({onCancelActive, comment, authStatus}) {
       evt.preventDefault();
       const form = new FormData(evt.target);
       const { commentText } = Object.fromEntries(form);
+      if (commentText.match(/^\s*$/)) {
+        return;
+      }
       dispatch(articleActions.postComment({
         _id: "",
         text: commentText,
         parent: {
           _id: comment._id,
-          _type: comment._type,
+          _type: 'comment',
         }
       }));
       onCancelActive();
     })
   }
 
+  if (!active) return '';
+
   return authStatus ? (
-    <form className={cn()} onSubmit={(evt) => callbacks.handlePostComment(evt)}>
+    <form className={cn()} style={{marginLeft: margin + 'px'}} onSubmit={(evt) => callbacks.handlePostComment(evt)}>
       <p className={cn('title')}>Новый ответ</p>
       <textarea className={cn('text')} name="commentText" defaultValue='Коммент'/>
       <div className={cn('controls')}>
@@ -39,7 +44,7 @@ function CommentForm({onCancelActive, comment, authStatus}) {
         <button className={cn('cancel')} type="button" onClick={onCancelActive}>Отмена</button>
       </div>
     </form>) : (
-    <div className={cn('no-auth')}>
+    <div className={cn('no-auth')} style={{marginLeft: margin + 'px'}}>
       <Link className={cn('link')} to='/login' state={{ back: location.pathname }}>Войдите</Link>, чтобы иметь возможность ответить.&nbsp;
       <button className={cn('close')} type="button" onClick={onCancelActive}>Отмена</button>
     </div>);
