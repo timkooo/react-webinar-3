@@ -8,6 +8,7 @@ import humanizeDate from '../../utils/humanize-date';
 function Comment({comment, active, onSetActive, authStatus, margin, isCurrentUser, children}) {
   const myRef = useRef(null);
   const cn = bem('Comment');
+  const formMargin = margin < 210 ? margin + 30 : margin;
 
   const executeScroll = () => {
     if (myRef.current) {
@@ -33,7 +34,7 @@ function Comment({comment, active, onSetActive, authStatus, margin, isCurrentUse
       <button className={cn('button')} onClick={callbacks.setActiveComment}>Ответить</button>
     </div>
     { children || ''}
-    {active && <div ref={myRef}><CommentForm onCancelActive={callbacks.cancelActive} comment={comment} authStatus={authStatus} margin={margin} active={active}/></div>}
+    {active && <div ref={myRef}><CommentForm onCancelActive={callbacks.cancelActive} comment={comment} authStatus={authStatus} margin={formMargin} active={active}/></div>}
   </>);
 }
 
